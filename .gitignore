@@ -39,6 +39,7 @@ admin.env
 _meta
 .serverless
 serverless.yml
+/lambda
 
 # Docker
 *.swp
