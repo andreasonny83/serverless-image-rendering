@@ -52,8 +52,8 @@ class ImageFetcher {
           throw new Error('Invalid File');
         }
       })
-      .then(() => Promise.resolve(
-        getS3(this._S3, this._bucketName, fileName)));
+      .then(() => Promise
+        .resolve(getS3(this._S3, this._bucketName, fileName)));
   }
 }
 

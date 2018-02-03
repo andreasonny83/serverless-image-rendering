@@ -2,7 +2,9 @@
 
 > Fast image delivering system using Sharp, AWS Lambda and Serverless framework.
 
-Demo Lambda function available [here](https://y7p8ti99y5.execute-api.us-east-1.amazonaws.com/dev/resize-image?f=img05.jpg&w=600&q=50)
+Demo Lambda function available [here](https://y7p8ti99y5.execute-api.us-east-1.amazonaws.com/dev/resize-image?f=sample.jpg&w=700&q=60&t=webp)
+
+Medium article available [here](https://medium.com/@andreasonny83/serverless-image-optimization-and-delivery-510b6c311fe5)
 
 - [Serverless Image Rendering](#serverless-image-rendering)
   - [Getting Started](#getting-started)
@@ -45,6 +47,13 @@ $ npm --version
 
 You may also want to install Serverless globally on your local machine for accessing the
 CLI functionality and directly interact with your deployed Lambda function.
+
+To install Serverless globally on your machine, run the following command
+
+```sh
+$ npm i -g serverless
+```
+
 Please, read the [official Serverless documentation](https://serverless.com/framework/docs/getting-started/)
 to know more about the installation process.
 
@@ -87,16 +96,17 @@ section.
 
 ### Enviroment configuration
 
-This project contains a `serverless.yml` file.
+This project contains a `serverless.sample.yml` file.
+You need to manually renamed it to `serverless.yml`.
 In order for your application to be correctly deployed to AWS, you will need to
 replace the `BUCKET` name under the `environment` section according to your S3
 bucket name previously created.
 
 ### dotENV
 
-For your local development the `.env` file will also need to contain your S3
-bucket name. This file already exists in this project so, just replace the
-`BUCKET=your-s3-bucket-name` with the correct name.
+For your local development you will need a `.env` file containing your S3 bucket name.
+Rename the `.env.sample` file in this project to be `.env` first, then replace the
+`your-s3-bucket-name` placeholder with the correct name of your S3 Bucket.
 
 ### Serving the app
 

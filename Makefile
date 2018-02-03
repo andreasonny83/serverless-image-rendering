@@ -1,7 +1,6 @@
-.PHONY:
-	image
-	package
-	clean
+.PHONY: image \
+	package \
+	clean \
 	clean-docker
 
 image:

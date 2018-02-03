@@ -1,10 +1,24 @@
 const app = require('express')();
+const bodyParser = require('body-parser');
+const Sharp = require('sharp');
+const Types = require('./src/Types');
 const ImageFetcher = require('./src/s3-image-fetcher');
-const { imageResizr } = require('./src/image-resizer');
+const ImageResizr = require('./src/image-resizer');
 require('dotenv').config();
+
+app.use(bodyParser.json());
+
+const displayStatus = () => ({
+  status: `OK`, });
+
+app.get('/status', (req, res) => {
+  res.status(200).send(displayStatus());
+});
 
 app.get('/resize-image', (req, res) => {
   const imageFetcher = new ImageFetcher(process.env.BUCKET);
+  const imageResizr = new ImageResizr(Types, Sharp);
+
   const fileName = req.query && req.query.f;
   const quality = req.query && +req.query.q || 100;
   const type = req.query && req.query.t;
@@ -14,7 +28,7 @@ app.get('/resize-image', (req, res) => {
   };
 
   return imageFetcher.fetchImage(fileName)
-    .then(data => imageResizr(data.image, size, quality, type))
+    .then(data => imageResizr.resize(data.image, size, quality, type))
     .then(data => {
       const img = new Buffer(data.image.buffer, 'base64');
 

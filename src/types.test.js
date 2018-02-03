@@ -1,22 +1,20 @@
-const { types } = require('./types');
+const Types = require('./Types');
 
-describe('types', () => {
-  test('types should be defined', () => {
-    expect(types).toBeDefined();
+describe('Types', () => {
+  test('Types should be defined', () => {
+    expect(Types).toBeDefined();
   });
 
-  test('types should be an object', () => {
-    expect(types).toBeInstanceOf(Object);
+  test('Types should be an array of object', () => {
+    expect(Array.isArray(Types)).toBe(true);
+    expect(Types.length).not.toBe(0);
   });
 
-  test('types should contain a list of valid image formats', () => {
-    expect(types.webp).toBeDefined();
-    expect(types.jpeg).toBeDefined();
-    expect(types.png).toBeDefined();
+  test(`Types objects should contain a 'sharp' key`, () => {
+    expect(Types[0].sharp).toBeDefined();
   });
 
-  test('each image format should contain a `sharp` and a `contentType` value', () => {
-    expect(types.webp.sharp).toBeDefined();
-    expect(types.webp.contentType).toBeDefined();
+  test(`Types objects should contain a 'contentType' key`, () => {
+    expect(Types[0].contentType).toBeDefined();
   });
 });

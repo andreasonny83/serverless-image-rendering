@@ -1,6 +1,8 @@
 const uuid = require('uuid');
+const Sharp = require('sharp');
+const Types = require('./src/types');
 const ImageFetcher = require('./src/s3-image-fetcher');
-const { imageResizr } = require('./src/image-resizer');
+const ImageResizr = require('./src/image-resizer');
 
 const displayStatus = () => {
   const APP_NAME = process.env.APP_NAME;
@@ -51,10 +53,12 @@ module.exports.fetchImage = (event, context, callback) => {
 
 module.exports.resizeImage = (event, context, callback) => {
   const imageFetcher = new ImageFetcher(process.env.BUCKET);
+  const imageResizr = new ImageResizr(Types, Sharp);
 
   const fileName = event.queryStringParameters && event.queryStringParameters.f;
   const status = event.queryStringParameters && 'status' in event.queryStringParameters;
   const quality = event.queryStringParameters && +event.queryStringParameters.q || 100;
+  const type = event.queryStringParameters && event.queryStringParameters.t;
   const size = {
     w: event && +event.queryStringParameters.w || null,
     h: event && +event.queryStringParameters.h || null,
@@ -73,7 +77,7 @@ module.exports.resizeImage = (event, context, callback) => {
   }
 
   return imageFetcher.fetchImage(fileName)
-    .then(data => imageResizr(data.image, size, quality))
+    .then(data => imageResizr.resize(data.image, size, quality, type))
     .then(data => {
       const contentType = data.contentType;
       const img = new Buffer(data.image.buffer, 'base64');

@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "description": "Server side image rendering using AWS Lamdba with Serverless",
   "scripts": {
-    "dev": "nodemon ./local.js",
-    "deploy": "serverless deploy --package lambda",
-    "deploy:prod": "serverless deploy --stage production --package lambda",
+    "serverless-offline": "serverless offline start",
+    "start": "nodemon ./local.js",
+    "deploy": "make package && serverless deploy --package lambda",
     "package": "serverless package",
     "test": "jest",
     "test:watch": "jest --watchAll"
@@ -15,9 +15,11 @@
   "devDependencies": {
     "@types/jest": "^22.1.0",
     "aws-sdk-mock": "^1.7.0",
+    "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "jest": "^22.1.4",
     "nodemon": "^1.14.11",
+    "serverless": "^1.26.0",
     "serverless-offline": "^3.16.0",
     "supertest": "^3.0.0"
   },
