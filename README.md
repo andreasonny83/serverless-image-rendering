@@ -2,6 +2,8 @@
 
 > Fast image delivering system using Sharp, AWS Lambda and Serverless framework.
 
+[![serverless][badge-serverless]](http://www.serverless.com)
+
 Demo Lambda function available [here](https://y7p8ti99y5.execute-api.us-east-1.amazonaws.com/dev/resize-image?f=sample.jpg&w=700&q=60&t=webp)
 
 Medium article available [here](https://medium.com/@andreasonny83/serverless-image-optimization-and-delivery-510b6c311fe5)
