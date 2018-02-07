@@ -220,3 +220,5 @@ $ sls info
 ## License
 
 [MIT License](https://andreasonny.mit-license.org/2018) © Andrea SonnY
+
+[badge-serverless]: http://public.serverless.com/badges/v3.svg
