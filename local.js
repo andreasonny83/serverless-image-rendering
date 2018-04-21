@@ -1,7 +1,7 @@
 const app = require('express')();
 const bodyParser = require('body-parser');
 const Sharp = require('sharp');
-const Types = require('./src/Types');
+const Types = require('./src/types');
 const ImageFetcher = require('./src/s3-image-fetcher');
 const ImageResizr = require('./src/image-resizer');
 require('dotenv').config();
