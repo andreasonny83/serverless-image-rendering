@@ -19,7 +19,7 @@ Medium article available [here](https://medium.com/@andreasonny83/serverless-ima
     - [dotENV](#dotenv)
     - [Serving the app](#serving-the-app)
     - [Resizing your images](#resizing-your-images)
-    - [Unit teststing](#unit-teststing)
+    - [Unit testing](#unit-testing)
   - [Deployment](#deployment)
     - [Docker](#docker)
   - [Log](#log)
@@ -153,7 +153,7 @@ automatically be converted into the nnew format.
 Assuminng that you have an image called `placeholder.png` on your S3 bucket:
 
 
-### Unit teststing
+### Unit testing
 
 ```sh
 $ npm test
