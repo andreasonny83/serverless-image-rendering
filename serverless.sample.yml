@@ -8,7 +8,7 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs6.10
+  runtime: nodejs10.x
   stage: dev
   region: us-east-1
   timeout: 5 # optional, in seconds, default is 6
@@ -26,8 +26,9 @@ plugins:
   - serverless-apigwy-binary
 
 functions:
-
   resizeImage:
+    name: ${self:service}-${self:provider.stage}
+    description: real time image resizing
     handler: handler.resizeImage
     events:
       - http:
