@@ -15,7 +15,7 @@ const displayStatus = () => {
   });
 };
 
-module.exports.fetchImage = (event, context, callback) => {
+module.exports.fetchImage = (event) => {
   const imageFetcher = new ImageFetcher(process.env.BUCKET);
 
   const fileName = event.queryStringParameters && event.queryStringParameters.f;
@@ -26,11 +26,11 @@ module.exports.fetchImage = (event, context, callback) => {
     console.log('fileName:', fileName);
   }
 
-  if (!!status) {
-    return callback(null, {
+  if (Boolean(status)) {
+    return {
       statusCode: 200,
       body: displayStatus(),
-    });
+    };
   }
 
   return imageFetcher.fetchImage(fileName)
@@ -38,20 +38,23 @@ module.exports.fetchImage = (event, context, callback) => {
       const contentType = data.contentType;
       const img = new Buffer(data.image.buffer, 'base64');
 
-      callback(null, {
+      return {
         statusCode: 200,
         headers: { 'Content-Type': contentType },
         body: img.toString('base64'),
         isBase64Encoded: true,
-      });
+      };
     })
     .catch(error => {
       console.error('Error:', error);
-      callback(null, error);
+      return {
+        statusCode: 200,
+        body: error,
+      };
     });
 };
 
-module.exports.resizeImage = (event, context, callback) => {
+module.exports.resizeImage = async (event, context, callback) => {
   const imageFetcher = new ImageFetcher(process.env.BUCKET);
   const imageResizr = new ImageResizr(Types, Sharp);
 
@@ -69,11 +72,11 @@ module.exports.resizeImage = (event, context, callback) => {
     console.log('fileName:', fileName);
   }
 
-  if (!!status) {
-    return callback(null, {
+  if (Boolean(status)) {
+    return {
       statusCode: 200,
       body: displayStatus(),
-    });
+    };
   }
 
   return imageFetcher.fetchImage(fileName)
@@ -82,16 +85,19 @@ module.exports.resizeImage = (event, context, callback) => {
       const contentType = data.contentType;
       const img = new Buffer(data.image.buffer, 'base64');
 
-      callback(null, {
+      return {
         statusCode: 200,
         headers: { 'Content-Type': contentType },
         body: img.toString('base64'),
         isBase64Encoded: true,
-      });
+      };
     })
     .catch(error => {
       console.error('Error:', error);
-      callback(null, error);
+      return {
+        statusCode: 404,
+        body: error,
+      }
     });
 };
 
