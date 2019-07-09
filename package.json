@@ -3,31 +3,29 @@
   "version": "0.0.0",
   "description": "Server side image rendering using AWS Lamdba with Serverless",
   "scripts": {
-    "serverless-offline": "serverless offline start",
-    "start": "nodemon ./local.js",
-    "deploy": "make package && serverless deploy --package lambda",
-    "package": "serverless package",
+    "serve": "serverless offline start",
+    "dev": "nodemon ./local.js",
+    "deploy": "serverless deploy",
     "test": "jest",
     "test:watch": "jest --watchAll"
   },
   "author": "andreasonny83@gmail.com",
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "^22.1.0",
-    "aws-sdk-mock": "^1.7.0",
-    "body-parser": "^1.18.2",
-    "express": "^4.16.2",
-    "jest": "^22.1.4",
-    "nodemon": "^1.14.11",
-    "serverless": "^1.26.0",
-    "serverless-offline": "^3.16.0",
-    "supertest": "^3.0.0"
+    "@types/jest": "^24.0.15",
+    "aws-sdk-mock": "^4.5.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "jest": "^24.8.0",
+    "nodemon": "^1.19.1",
+    "serverless-offline": "^5.7.2",
+    "supertest": "^4.0.2"
   },
   "dependencies": {
-    "aws-sdk": "^2.186.0",
-    "dotenv": "^4.0.0",
+    "aws-sdk": "^2.489.0",
+    "dotenv": "^8.0.0",
     "serverless-apigw-binary": "^0.4.4",
-    "serverless-apigwy-binary": "^0.1.0",
-    "sharp": "^0.19.0"
+    "serverless-apigwy-binary": "^1.0.0",
+    "sharp": "^0.22.1"
   }
 }

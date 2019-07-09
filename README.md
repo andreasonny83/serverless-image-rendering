@@ -8,24 +8,24 @@ Demo Lambda function available [here](https://y7p8ti99y5.execute-api.us-east-1.a
 
 Medium article available [here](https://medium.com/@andreasonny83/serverless-image-optimization-and-delivery-510b6c311fe5)
 
-- [Serverless Image Rendering](#serverless-image-rendering)
-  - [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-  - [Optional requisites](#optional-requisites)
-    - [Installation](#installation)
-    - [Images Bucket](#images-bucket)
-  - [Usage](#usage)
-    - [Enviroment configuration](#enviroment-configuration)
-    - [dotENV](#dotenv)
-    - [Serving the app](#serving-the-app)
-    - [Resizing your images](#resizing-your-images)
-    - [Unit teststing](#unit-teststing)
-  - [Deployment](#deployment)
-    - [Docker](#docker)
-  - [Log](#log)
-  - [Contributing](#contributing)
-  - [Built With](#built-with)
-  - [License](#license)
+- [Serverless Image Rendering](#Serverless-Image-Rendering)
+  - [Getting Started](#Getting-Started)
+    - [Prerequisites](#Prerequisites)
+  - [Optional requisites](#Optional-requisites)
+    - [Installation](#Installation)
+    - [Images Bucket](#Images-Bucket)
+  - [Usage](#Usage)
+    - [Enviroment configuration](#Enviroment-configuration)
+    - [dotENV](#dotENV)
+    - [Serving the app](#Serving-the-app)
+    - [Resizing your images](#Resizing-your-images)
+    - [Unit teststing](#Unit-teststing)
+  - [Deployment](#Deployment)
+    - [Docker](#Docker)
+  - [Log](#Log)
+  - [Contributing](#Contributing)
+  - [Built With](#Built-With)
+  - [License](#License)
 
 ## Getting Started
 
@@ -41,10 +41,10 @@ try running the following command.
 
 ```sh
 $ node --version
-v7.10.1
+v10.15.1
 
 $ npm --version
-4.2.0
+6.9.0
 ```
 
 You may also want to install Serverless globally on your local machine for accessing the
