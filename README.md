@@ -15,13 +15,12 @@ Medium article available [here](https://medium.com/@andreasonny83/serverless-ima
     - [Installation](#Installation)
     - [Images Bucket](#Images-Bucket)
   - [Usage](#Usage)
-    - [Enviroment configuration](#Enviroment-configuration)
+    - [Environment configuration](#Environment-configuration)
     - [dotENV](#dotENV)
     - [Serving the app](#Serving-the-app)
     - [Resizing your images](#Resizing-your-images)
-    - [Unit teststing](#Unit-teststing)
+    - [Unit testing](#Unit-testing)
   - [Deployment](#Deployment)
-    - [Docker](#Docker)
   - [Log](#Log)
   - [Contributing](#Contributing)
   - [Built With](#Built-With)
@@ -64,10 +63,8 @@ If you want to deploy your code to AWS, then you will also need an AWS account a
 
 ## Optional requisites
 
-This project is making use of Serverless and Docker.
-They are both optionals however Docker will be required for deploying your local code
-to Lambda if you are not running this project from a Linux machine.
-Read the [Docker](#docker) section to know more about.
+This project is making use of Serverless.
+It is optional, however it will be required for deploying your local code to Lambda.
 
 ### Installation
 
@@ -78,7 +75,7 @@ $ git clone https://github.com/andreasonny83/serverless-image-rendering.git
 $ cd serverless-image-rendering
 ```
 
-Then install all the Node dependencies usin npm or Yarn
+Then install all the Node dependencies using npm or Yarn
 
 ```sh
 $ npm install
@@ -91,12 +88,12 @@ $ yarn
 This project is making use of a pre-existing S3 bucket from where fetching
 the images to be processed and deliver to the client.
 If you don't have an S3 already, create one from your AWS dashboard and
-continue reading the [Enviroment configuration](#enviroment-configuration)
+continue reading the [Environment configuration](#environment-configuration)
 section.
 
 ## Usage
 
-### Enviroment configuration
+### Environment configuration
 
 This project contains a `serverless.sample.yml` file.
 You need to manually renamed it to `serverless.yml`.
@@ -113,47 +110,42 @@ Rename the `.env.sample` file in this project to be `.env` first, then replace t
 ### Serving the app
 
 ```sh
-$ npm run dev
+$ npm run serve
 ```
 
-This will run NodeJS against `local.js` using `express`.
-This file will be only used during your local development and the real
-Lambda function handler is instead sitting inside `handler.js`
-so any change apported to `local.js` that you want to deploy in your Lambda
-function will require a correspondent change made inside your `handler.js`
-file as well.
+This will run the Lambda function locally using `serverless-offline`.
 
 ### Resizing your images
 
-While ruinng your local app, open a browser to
-[`http://localhost:3000/resize-image/status`](http://localhost:3000/resize-image/status)
+While running your local app, open a browser to
+[`http://localhost:3000/resize-image?status`](http://localhost:3000/resize-image?status)
 
 You should be able to see a JSON information to prove that your app is actually
-up and runing.
+up and running.
 
-You can then replace the `/status` endpoint with your image information.
+You can then replace the `?status` endpoint with your image information.
 
 `http://localhost:3000/resize-image?f=FILE-NAME&w=WIDTH&h=HEIGHT&q=QUALITY&t=TYPE`
 
-| Query strinng name | Type   | Required | Description |
+| Query string name  | Type   | Required | Description |
 | ------------------ | ------ | -------- | ----------- |
-| `f`                | String | Yes      | The complete image name uploaded to your S3 bucke (eg. placeholder.jpg)
+| `f`                | String | Yes      | The complete image name uploaded to your S3 bucket (eg. placeholder.jpg)
 | `w`                | Number | No       | The image width
 | `h`                | Number | No       | The image height
 | `q`                | Number | No       | The image quality (between 1-100)
 | `t`                | String | No       | The image type (default is webp) Available values are [webp, jpeg and png]
 
 Note. If the Type is different from your original image type, it will
-automatically be converted into the nnew format.
+automatically be converted into the new format.
 
 **Example**
 
 `http://localhost:3000/resize-image?f=placeholder.png&w=600&q=75&t=jpeg`
 
-Assuminng that you have an image called `placeholder.png` on your S3 bucket:
+Assuming that you have an image called `placeholder.png` on your S3 bucket:
 
 
-### Unit teststing
+### Unit testing
 
 ```sh
 $ npm test
@@ -171,13 +163,7 @@ $ npm run test:watch
 
 1. Install serverless globally (optional)
 1. Make sure you have correctly set up your AWS credentials
-1. Run `Make package`
 1. run `npm run deploy`
-
-### Docker
-
-The `Make package` command will run `npm install` from inside a Docker
-container to reproduce the same envirnment configuration present in AWS Lambda.
 
 ## Log
 
@@ -193,7 +179,7 @@ $ sls logs -f {function-name} -t
 ```
 
 If you don't remember what's your function name, you can easily retrieve
-all your Lambda ingormation running the following command from inside your
+all your Lambda information running the following command from inside your
 project's directory.
 
 ```sh
@@ -203,22 +189,21 @@ $ sls info
 ## Contributing
 
 1.  Fork it!
-1.  Create your feature branch: `git checkout -b my-new-feature`
-1.  Add your changes: `git add .`
-1.  Commit your changes: `git commit -am 'Add some feature'`
-1.  Push to the branch: `git push origin my-new-feature`
-1.  Submit a pull request :sunglasses:
+2.  Create your feature branch: `git checkout -b my-new-feature`
+3.  Add your changes: `git add .`
+4.  Commit your changes: `git commit -am 'Add some feature'`
+5.  Push to the branch: `git push origin my-new-feature`
+6.  Submit a pull request :sunglasses:
 
 ## Built With
 
 * VSCode
-* Docker
 * dotENV
 * Serverless
 * Love
 
 ## License
 
-[MIT License](https://andreasonny.mit-license.org/2018) © Andrea SonnY
+[MIT License](https://andreasonny.mit-license.org/2018-2019) © Andrea SonnY
 
 [badge-serverless]: http://public.serverless.com/badges/v3.svg
