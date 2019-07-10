@@ -4,7 +4,7 @@
 
 [![serverless][badge-serverless]](http://www.serverless.com)
 
-Demo Lambda function available [here](https://y7p8ti99y5.execute-api.us-east-1.amazonaws.com/dev/resize-image?f=sample.jpg&w=700&q=60&t=webp)
+Demo Lambda function available [here](https://dght5ywo5j.execute-api.us-east-1.amazonaws.com/dev/resize-image?f=placeholder.jpg&w=600&q=75&t=webp)
 
 Medium article available [here](https://medium.com/@andreasonny83/serverless-image-optimization-and-delivery-510b6c311fe5)
 
@@ -20,6 +20,7 @@ Medium article available [here](https://medium.com/@andreasonny83/serverless-ima
     - [Serving the app](#Serving-the-app)
     - [Resizing your images](#Resizing-your-images)
     - [Unit testing](#Unit-testing)
+    - [Docker](#Docker)
   - [Deployment](#Deployment)
   - [Log](#Log)
   - [Contributing](#Contributing)
@@ -39,10 +40,8 @@ To make sure you have them available on your machine,
 try running the following command.
 
 ```sh
-$ node --version
+$ node -v && npm -v
 v10.15.1
-
-$ npm --version
 6.9.0
 ```
 
@@ -63,8 +62,10 @@ If you want to deploy your code to AWS, then you will also need an AWS account a
 
 ## Optional requisites
 
-This project is making use of Serverless.
-It is optional, however it will be required for deploying your local code to Lambda.
+This project is making use of Serverless and Docker.
+They are both optionals however Docker will be required for deploying your local code
+to Lambda if you are not running this project from a Linux machine.
+Read the [Docker](#docker) section to know more about.
 
 ### Installation
 
@@ -159,11 +160,29 @@ use the following npm command instead:
 $ npm run test:watch
 ```
 
+### Docker
+
+The `Make install` command will run `npm install` from inside a Docker
+container to reproduce the same environment configuration present on AWS Lambda.
+Deploying the Lambda function after running `npm install` from your local machine
+will probably result on the function returning a server error if your local machine
+configuration is different from the one on AWS.
+
+To make sure the `npm run deploy` succeeds:
+
+1. Clean your `node_modules` folder with `rm -rf node_modules package-lock.json`
+1. Create the Docker image with `make build`
+1. Run `npm install` from inside the Docker container with `make install`
+1. Then run serverless deploy` with `npm run deploy`
+
 ## Deployment
 
-1. Install serverless globally (optional)
+1. Install serverless globally
 1. Make sure you have correctly set up your AWS credentials
-1. run `npm run deploy`
+1. Install the Node dependencies with Docker by running `make build` to generate
+the Docker image, the run `make install` (This will run `npm install` from inside
+the Docker container using the same environment setup running on AWS)
+1. run `npm run deploy` to deploy your function to AWS Lambda
 
 ## Log
 
